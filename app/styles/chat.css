@@ -1,0 +1,131 @@
+body{
+	background-color: #FAFAFA;
+	height: 100%;
+	font-family: Roboto, Arial;
+	overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6, p, a{
+	font-family: Roboto, Arial;	
+	font-weight: 500;
+}
+paper-card{
+	display: block;
+	width: 85%;
+    max-width: 900px;
+	margin: 0 auto;
+	height: calc(100% - 80px);
+	top: -250px;
+}
+.heading{
+	background-color: #EEEEEE;
+}
+.heading h1{
+	font-size: 1.3em;
+	font-weight: 400;
+	margin-right: 24px;
+}
+#img_text_div{
+	padding: 12px 20px 0px 20px;
+	border-bottom:1px solid #E0E0E0;
+	min-height: 62px;
+}
+#text_div{
+	padding-top: 4px;
+	margin-bottom: 18px;	
+	margin-left: 72px;
+}
+img{
+	float: left;
+	border-radius:50%
+}
+#item_human{
+	flex: 0;margin: 0px;
+	font-weight: 600;
+}
+#item_text{
+	margin: 4px 0px;
+	font-weight: 400;
+}
+#item_time{
+	font-weight: 400;
+	color: #5D5D5D;
+	margin: 0;
+	float: right;
+	font-size: 0.9em;
+}
+#channel_list {
+	padding-left: 24px;
+	line-height: 68px;
+	border-bottom: 1px solid #E0E0E0;
+	min-height: 68px;
+	font-weight: 400;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+paper-toolbar.paper-toolbar-0{
+	background: #009688;
+}
+#topBar.paper-toolbar{
+	background-color: #00796B;
+}
+paper-toolbar.tall{
+	height: 280px;
+}
+.content{
+	overflow-x: auto;
+	position: static;
+	height: calc(100% - 126px);
+}
+form {
+	padding: 2px 0;
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #F5F5F5;
+	border-top: 1px solid #E0E0E0;
+	margin: 0;
+}
+.paper-input-container-0 .unfocused-line.paper-input-container{
+	background: none;
+}
+.paper-input-container-0 .focused-line.paper-input-container{
+	background: none;
+}
+paper-input-container{
+	margin-bottom: 8px;
+	margin-top: -10px;
+	margin-left: 12px;
+}
+paper-fab{
+	height: 48px;
+	width: 48px;
+	margin: 0 12px;
+}
+paper-input{
+	flex: 1;
+	margin: 0 12px;			  
+}
+paper-fab.paper-fab-0{
+	background: #00BFA5;
+}	
+@media screen and (max-width: 640px){
+	paper-card{
+		max-width: 100%;
+		height: 100%;
+		top: 0;
+		width: 100%;
+	}
+	paper-toolbar.paper-toolbar-0{
+		display: none;
+	}
+	.heading{
+		background-color: #009688;
+		color: white;
+	}
+	.content{
+		height: calc(100% - 118px);
+	}
+}
