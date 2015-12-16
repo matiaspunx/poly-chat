@@ -1,5 +1,48 @@
-![](https://cloud.githubusercontent.com/assets/110953/7877439/6a69d03e-0590-11e5-9fac-c614246606de.png)
-## Polymer Starter Kit
+## Polymer Chat
+
+Chat hecho con Polymer y Firebase. 
+
+### ¿Cómo empezar? 
+#### Con nodejs instaldo corré los siguiente comandos en tu terminal:
+
+Usuarios experimentados: 
+
+```sh
+npm install -g gulp bower && npm install && bower install
+```
+
+Usuarios intermedios: 
+
+```sh
+npm install -g gulp bower
+```
+
+```sh
+cd poly-chat
+```
+
+```sh
+npm install && bower install
+```
+
+### Cómo correr el servidor y hacer un deploy?
+
+```sh
+gulp serve
+```
+
+Esto va a levantar un servidor web dinamico en tu computadora.
+
+
+```sh
+gulp
+```
+Este comando va a deployar tu aplicación y dejar el proyecto listo para publicar.
+
+## Si queres aprender mas, segui leyendo para abajo (ingles)
+
+
+# Chat basado en Polymer Starter Kit
 
 > A starting point for building web applications with Polymer 1.0
 
