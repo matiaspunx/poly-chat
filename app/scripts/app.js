@@ -2,28 +2,32 @@
 'use strict';
 
   var app = document.querySelector('#app');
-  var profilePic = "http://usn.com.np/wp-content/uploads/2014/07/dummy-avatar.png";
-  var profileName = "anonymous";
+  var profilePic, profileName;
 
   app.items = [];
   app.channels = [];
   app.firebaseURL = 'https://chat-edr.firebaseio.com/';
   app.firebaseProvider = 'google';
 
+  /* Funcion updateItems() para actualizar el chat cuando hay un cambio en la base de datos */
   app.updateItems = function(snapshot) {
     this.items = [];
+
     snapshot.forEach(function(childSnapshot) {
       var item = childSnapshot.val();
       var UTCTime = new Date(item.time);
+
       item.time = UTCTime.getHours() + ":" + (UTCTime.getMinutes() < 10?'0':'') + UTCTime.getMinutes();
       var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June","July", "Aug", "Sept", "Oct", "Nov", "Dec"];
       item.date = UTCTime.getUTCDate() + " " + monthNames[UTCTime.getUTCMonth()] + " " + UTCTime.getUTCFullYear();
+      
       this.push('items', item);
     }.bind(this));
-    setTimeout(scrollToBottom, 0);
+
     function scrollToBottom(){
       document.getElementById('mainContainer').scrollTop = 999999999999999999999999;
-    }      
+    }
+    setTimeout(scrollToBottom, 0); 
   };
 
   app.showChannels = function(snapshot) {
@@ -35,7 +39,8 @@
   };  
 
   app.addItem = function(event) {
-    event.preventDefault(); // Don't send the form!
+    event.preventDefault(); // No enviamos el formulario! :)
+
     if (app.newItemValue.length > 0){
       var currentTime = (new Date()).getTime();
       this.ref.push({
@@ -48,18 +53,18 @@
     }
   };
 
+  /* Función que captura el evento del login y nos nuestra un mensaje si hay un error (medio dificil que pase si estamos usando google) */
   app.onFirebaseError = function(event) {
     this.$.errorToast.text = event.detail.message;
     this.$.errorToast.show();
   };
 
+  /* Funcion que captura el evento del login y nos rescata la información del usuario, nombre y avatar */
   app.onFirebaseLogin = function(e) {
     profilePic = e.detail.user.google.profileImageURL;
-    //profilePic = 'http://usn.com.np/wp-content/uploads/2014/07/dummy-avatar.png';
     profileName = e.detail.user.google.displayName;
-    //profileName = 'Matias';
-    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/';
-    this.ref = new Firebase(URRRRLLL);
+    var chatURL = 'https://chat-edr.firebaseio.com/chat/';
+    this.ref = new Firebase(chatURL);
     this.ref.on('value', function(snapshot) {
       app.showChannels(snapshot);
     });
@@ -67,10 +72,9 @@
 
   app.changeChannel = function(value){
     var pages = document.querySelector('iron-pages');
-    pages.selected = 1;
-    //var URRRRLLL = 'https://chat-with-me-2183.firebaseio.com/chat/' + (value.target.textContent).substring(1);
-    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/' + (value.target.textContent).substring(1);
-    this.ref = new Firebase(URRRRLLL);
+    pages.selected = 1; // Cambiamos a la segunda pagina
+    var chatURL = 'https://chat-edr.firebaseio.com/chat/' + (value.target.textContent).substring(1);
+    this.ref = new Firebase(chatURL);
     this.ref.on('value', function(snapshot) {
       app.updateItems(snapshot);
     });
@@ -83,8 +87,8 @@
   }
 
   app.createChannelReal = function(){
-    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/escuela-dev-rock/';
-    this.ref = new Firebase(URRRRLLL);
+    var chatURL = 'https://chat-edr.firebaseio.com/chat/escuela-dev-rock/';
+    this.ref = new Firebase(chatURL);
     var currentTime = (new Date()).getTime();
     this.ref.push({
       text: '¡Bienvenidos!',
