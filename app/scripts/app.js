@@ -82,18 +82,21 @@
     pages.selected = 0;   
   }
 
+  app.createChannelReal = function(){
+    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/escuela-dev-rock/';
+    this.ref = new Firebase(URRRRLLL);
+    var currentTime = (new Date()).getTime();
+    this.ref.push({
+      text: '¡Bienvenidos!',
+      img: profilePic,
+      username: profileName,
+      time: currentTime
+    });
+    console.log(currentTime);
+  }
+
   app.createChannel = function(){
-    alert("Coming Soon");
-    // var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/general/';
-    // this.ref = new Firebase(URRRRLLL);
-    // var currentTime = (new Date()).getTime();
-    // this.ref.push({
-    //   text: 'Hello',
-    //   img: profilePic,
-    //   username: 'BOT',
-    //   time: currentTime
-    // });
-    // console.log(currentTime);
+    alert("Muy pronto");
   }
 
 })(document);

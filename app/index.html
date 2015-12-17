@@ -42,10 +42,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
-  <!-- build:css styles/chat.css -->
-  <link rel="stylesheet" href="styles/chat.css">
-  <!-- endbuild-->
-
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
@@ -53,6 +49,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
   <!-- endreplace-->
+
+  <!-- build:css styles/chat.css -->
+  <link rel="stylesheet" href="styles/chat.css">
+  <!-- endbuild-->
 </head>
 
 <body unresolved class="fullbleed layout vertical">
@@ -75,42 +75,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <iron-pages selected="0" class="flex">
 
         <!-- Titulo y selector de canales (Onda slack) -->
-        <paper-card>
+        <paper-card><!-- page = 0 -->
           <div class="heading center horizontal layout toolbar-tools style-scope paper-toolbar">
-            <h1 style="margin-left:44px; flex:1">Chat with Me</h1>
-            <paper-icon-button icon="icons:add" on-tap="createChannel" title="Create new Channel"></paper-icon-button>
+            <h1 style="margin-left:10px; flex:1">Escuela Dev Rock - Chat</h1>
+            <paper-icon-button icon="icons:add" on-tap="createChannelReal" title="Crear un nuevo canal"></paper-icon-button>
           </div>
           <div class="content">
             <template is="dom-repeat" items="{{channels}}">
-              <div id="channel_list" on-tap="changeChannel" value="{{item}}">#[[item]]</div>
+              <div class="channel_list" on-tap="changeChannel" value="{{item}}">#[[item]]</div>
             </template>                 
           </div>
         </paper-card>
 
-        <paper-card>
+        <paper-card><!-- page = 1 -->
           <div class="heading center horizontal layout toolbar-tools style-scope paper-toolbar">
             <paper-icon-button icon="icons:arrow-back" on-tap="backChannel"></paper-icon-button>
             <h1 style="margin-left:4px">{{thisIsDog}}</h1>
           </div>
           <div class="content" id="mainContainer">
             <template is="dom-repeat" items="{{items}}">
-              <div id="img_text_div">
+              <div class="img_text_div">
                 <img src="[[item.img]]" width="50px" height="50px">
-                <div id="text_div">
-                  <p id="item_time" title="[[item.date]]">[[item.time]]</p>
-                  <p id="item_human">[[item.username]]</p>
-                  <p id="item_text">[[item.text]]</p>
+                <div class="text_div">
+                  <p class="item_time" title="[[item.date]]">[[item.time]]</p>
+                  <p class="item_human">[[item.username]]</p>
+                  <p class="item_text">[[item.text]]</p>
                 </div>
               </div>
             </template>       
           </div>
           <div class="bottom">
             <form on-submit="addItem">
-              <paper-input placeholder="Write a message" value="{{newItemValue}}" style="width:100%"></paper-input>
+              <paper-input placeholder="Escribí tu mensaje" value="{{newItemValue}}" style="width:100%"></paper-input>
               <paper-fab icon="send" on-click="addItem"></paper-fab>
             </form>
           </div>
-        </paper-card>         
+        </paper-card>
+
       </iron-pages>
       
     </template>

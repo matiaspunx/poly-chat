@@ -1,10 +1,10 @@
 body{
-	background-color: #FAFAFA;
+	background-color: #000;
 	height: 100%;
 	font-family: Roboto, Arial;
 	overflow: hidden;
 }
-h1, h2, h3, h4, h5, h6, p, a{
+h1, h2, h3, h4, h5, h6, p, a {
 	font-family: Roboto, Arial;	
 	font-weight: 500;
 }
@@ -14,22 +14,23 @@ paper-card{
     max-width: 900px;
 	margin: 0 auto;
 	height: calc(100% - 80px);
-	top: -250px;
+	top: -90px;
 }
 .heading{
-	background-color: #EEEEEE;
+	background-color: #999;
 }
 .heading h1{
 	font-size: 1.3em;
 	font-weight: 400;
 	margin-right: 24px;
+	color: #000
 }
-#img_text_div{
+.img_text_div{
 	padding: 12px 20px 0px 20px;
 	border-bottom:1px solid #E0E0E0;
 	min-height: 62px;
 }
-#text_div{
+.text_div{
 	padding-top: 4px;
 	margin-bottom: 18px;	
 	margin-left: 72px;
@@ -38,22 +39,22 @@ img{
 	float: left;
 	border-radius:50%
 }
-#item_human{
+.item_human{
 	flex: 0;margin: 0px;
 	font-weight: 600;
 }
-#item_text{
+.item_text{
 	margin: 4px 0px;
 	font-weight: 400;
 }
-#item_time{
+.item_time{
 	font-weight: 400;
 	color: #5D5D5D;
 	margin: 0;
 	float: right;
 	font-size: 0.9em;
 }
-#channel_list {
+.channel_list {
 	padding-left: 24px;
 	line-height: 68px;
 	border-bottom: 1px solid #E0E0E0;
@@ -63,19 +64,18 @@ img{
 	cursor: pointer;
 }
 paper-toolbar.paper-toolbar-0{
-	background: #222;
+	background: #000;
 }
 #topBar.paper-toolbar{
 	background-color: #000;
 }
 paper-toolbar.tall{
-	height: 280px !important;
+	height: 280px;
 }
 .content{
 	overflow-x: auto;
 	position: static;
-	height: 500px;
-	margin-bottom: 62px;
+	height: 400px;
 }
 form {
 	padding: 2px 0;
@@ -95,7 +95,7 @@ form {
 .paper-input-container-0 .focused-line.paper-input-container{
 	background: none;
 }
-paper-input-container{
+paper-input-container {
 	margin-bottom: 8px;
 	margin-top: -10px;
 	margin-left: 12px;
@@ -110,7 +110,7 @@ paper-input{
 	margin: 0 12px;			  
 }
 paper-fab.paper-fab-0{
-	background: #555;
+	background: #333;
 }	
 @media screen and (max-width: 640px){
 	paper-card{
@@ -123,10 +123,10 @@ paper-fab.paper-fab-0{
 		display: none;
 	}
 	.heading{
-		background-color: #222;
+		background-color: #999;
 		color: white;
 	}
 	.content{
-		height: calc(100% - 118px);
+		height: 300px;
 	}
 }
