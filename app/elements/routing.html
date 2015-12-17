@@ -23,12 +23,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     // Middleware
     function scrollToTop(ctx, next) {
-      app.scrollPageToTop();
+      //app.scrollPageToTop();
       next();
     }
 
     function closeDrawer(ctx, next) {
-      app.closeDrawer();
+      //app.closeDrawer();
       next();
     }
 
@@ -60,15 +60,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     // 404
     page('*', function() {
-      app.$.toast.text = 'No podemos encontrar: ' + window.location.href  + '. Te vamos a llevar de nuevo a la home';
+      app.$.toast.text = 'No podemos encontrar: ' + window.location.href;
       app.$.toast.show();
       page.redirect(app.baseUrl);
     });
 
     // add #! before urls
+    page();
+    /*
     page({
       hashbang: true
     });
+     */
 
   });
 </script>

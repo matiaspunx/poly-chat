@@ -63,18 +63,19 @@ img{
 	cursor: pointer;
 }
 paper-toolbar.paper-toolbar-0{
-	background: #009688;
+	background: #222;
 }
 #topBar.paper-toolbar{
-	background-color: #00796B;
+	background-color: #000;
 }
 paper-toolbar.tall{
-	height: 280px;
+	height: 280px !important;
 }
 .content{
 	overflow-x: auto;
 	position: static;
-	height: calc(100% - 126px);
+	height: 500px;
+	margin-bottom: 62px;
 }
 form {
 	padding: 2px 0;
@@ -109,7 +110,7 @@ paper-input{
 	margin: 0 12px;			  
 }
 paper-fab.paper-fab-0{
-	background: #00BFA5;
+	background: #555;
 }	
 @media screen and (max-width: 640px){
 	paper-card{
@@ -122,7 +123,7 @@ paper-fab.paper-fab-0{
 		display: none;
 	}
 	.heading{
-		background-color: #009688;
+		background-color: #222;
 		color: white;
 	}
 	.content{

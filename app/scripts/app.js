@@ -1,54 +1,99 @@
-/*
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-
 (function(document) {
-  'use strict';
+'use strict';
 
-  // Grab a reference to our auto-binding template
-  // and give it some initial binding values
-  // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
+  var profilePic = "http://usn.com.np/wp-content/uploads/2014/07/dummy-avatar.png";
+  var profileName = "anonymous";
 
-  // Sets app default base URL
-  app.baseUrl = '/';
-  if (window.location.port === '') {  // if production
-    // Uncomment app.baseURL below and
-    // set app.baseURL to '/your-pathname/' if running from folder in production
-    // app.baseUrl = '/polymer-starter-kit/';
-  }
+  app.items = [];
+  app.channels = [];
+  app.firebaseURL = 'https://chat-edr.firebaseio.com/';
+  app.firebaseProvider = 'google';
 
-  app.displayInstalledToast = function() {
-    // Check to make sure caching is actually enabled—it won't be in the dev environment.
-    if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
-      Polymer.dom(document).querySelector('#caching-complete').show();
+  app.updateItems = function(snapshot) {
+    this.items = [];
+    snapshot.forEach(function(childSnapshot) {
+      var item = childSnapshot.val();
+      var UTCTime = new Date(item.time);
+      item.time = UTCTime.getHours() + ":" + (UTCTime.getMinutes() < 10?'0':'') + UTCTime.getMinutes();
+      var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June","July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+      item.date = UTCTime.getUTCDate() + " " + monthNames[UTCTime.getUTCMonth()] + " " + UTCTime.getUTCFullYear();
+      this.push('items', item);
+    }.bind(this));
+    setTimeout(scrollToBottom, 0);
+    function scrollToBottom(){
+      document.getElementById('mainContainer').scrollTop = 999999999999999999999999;
+    }      
+  };
+
+  app.showChannels = function(snapshot) {
+    this.channels = [];
+    snapshot.forEach(function(childSnapshot) {
+      var channel = childSnapshot.key();
+      this.push('channels', channel);
+    }.bind(this));  
+  };  
+
+  app.addItem = function(event) {
+    event.preventDefault(); // Don't send the form!
+    if (app.newItemValue.length > 0){
+      var currentTime = (new Date()).getTime();
+      this.ref.push({
+        text: app.newItemValue,
+        img: profilePic,
+        username: profileName,
+        time: currentTime
+      });
+      app.newItemValue = '';        
     }
   };
 
-  // Listen for template bound event to know when bindings
-  // have resolved and content has been stamped to the page
-  app.addEventListener('dom-change', function() {
-    console.log('Nuestro chat está listo para rockear!');
-  });
-
-  // See https://github.com/Polymer/polymer/issues/1381
-  window.addEventListener('WebComponentsReady', function() {
-    // imports are loaded and elements have been registered
-  });
-
-
-  // Scroll page to top and expand header
-  app.scrollPageToTop = function() {
-    app.$.headerPanelMain.scrollToTop(true);
+  app.onFirebaseError = function(event) {
+    this.$.errorToast.text = event.detail.message;
+    this.$.errorToast.show();
   };
 
-  app.closeDrawer = function() {
-    app.$.paperDrawerPanel.closeDrawer();
+  app.onFirebaseLogin = function(e) {
+    profilePic = e.detail.user.google.profileImageURL;
+    //profilePic = 'http://usn.com.np/wp-content/uploads/2014/07/dummy-avatar.png';
+    profileName = e.detail.user.google.displayName;
+    //profileName = 'Matias';
+    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/';
+    this.ref = new Firebase(URRRRLLL);
+    this.ref.on('value', function(snapshot) {
+      app.showChannels(snapshot);
+    });
   };
+
+  app.changeChannel = function(value){
+    var pages = document.querySelector('iron-pages');
+    pages.selected = 1;
+    //var URRRRLLL = 'https://chat-with-me-2183.firebaseio.com/chat/' + (value.target.textContent).substring(1);
+    var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/' + (value.target.textContent).substring(1);
+    this.ref = new Firebase(URRRRLLL);
+    this.ref.on('value', function(snapshot) {
+      app.updateItems(snapshot);
+    });
+    app.thisIsDog = value.target.textContent;
+  }
+
+  app.backChannel = function(){
+    var pages = document.querySelector('iron-pages');
+    pages.selected = 0;   
+  }
+
+  app.createChannel = function(){
+    alert("Coming Soon");
+    // var URRRRLLL = 'https://chat-edr.firebaseio.com/chat/general/';
+    // this.ref = new Firebase(URRRRLLL);
+    // var currentTime = (new Date()).getTime();
+    // this.ref.push({
+    //   text: 'Hello',
+    //   img: profilePic,
+    //   username: 'BOT',
+    //   time: currentTime
+    // });
+    // console.log(currentTime);
+  }
 
 })(document);
