@@ -13,8 +13,8 @@ paper-card{
 	width: 85%;
     max-width: 900px;
 	margin: 0 auto;
-	height: calc(100% - 80px);
-	top: -90px;
+	height: 400px;
+	margin-top: 20px;
 }
 .heading{
 	background-color: #999;
@@ -75,7 +75,7 @@ paper-toolbar.tall{
 .content{
 	overflow-x: auto;
 	position: static;
-	height: 400px;
+	height: 285px;
 }
 form {
 	padding: 2px 0;
